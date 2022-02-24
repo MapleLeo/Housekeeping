@@ -1,1 +1,2 @@
 print("maple")
+print("hello")
