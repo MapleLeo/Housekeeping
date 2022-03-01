@@ -20,6 +20,12 @@ class Application:
                 id=data['job_id'],
                 created_at=data['jobs.created_at'],
                 updated_at=data['jobs.updated_at']))
+        if('housekeepers.id' in data):
+            self.housekeeper = Housekeeper(dict(
+                data,
+                id=data['housekeeper_id'],
+                created_at=data['housekeepers.created_at'],
+                updated_at=data['housekeepers.updated_at']))
 
     @classmethod
     def save(cls,data):

@@ -39,7 +39,7 @@ def apply_job(id):
         return redirect('/logout')
     if 'resume' not in request.files:
         flash("Please attach resume.", "application")
-        return redirect('job/'+id)
+        return redirect('/job/'+str(id))
     file = request.files['resume']
     file.save(os.path.join("flask_app/Static/", file.filename))
     data = {

@@ -1,0 +1,22 @@
+Name: Maple Li
+Project Title: PawFosterFamily
+Project Stack: Python
+GitHub Repo Link: https://github.com/MapleLeo/PawFosterFamily
+
+Project Description: The PawFosterFamily is a web-based application wherein the welfare of shelter pet animals is taken care of. It is a place to connect shelter with fosterfamily to take care of stray, lost, abandoned, or surrendered pets. The application allows the shelter to post pets that need foster and fosterfamily to volunteer fostercare towards the pets. 
+
+On the Login/Sign Up page, the users can switch between foster page or shelter page and create a new profile or log in to the dashboard using their email and password.
+
+On the foster dashboard page, the user can view the available foster pets list that shelters posted and click into each pet's profile to learn the details and send foster request. From dashboard, the user can go to the personal profile page. On the profile page, the user can see the pets he/she fosters and view the notifications from shelter.
+
+On the shelter dashboard page, the shelteruser can post foster pets and review foster requests from fosterfamilies.
+
+Features–
+Login/Signup modules 
+Live previews 
+Full-screen mode 
+Cross-platform 
+Password Hashing 
+Interactive UI
+
+New Programming Concept(s) I'm Planning to Learn: Cybersecurity
