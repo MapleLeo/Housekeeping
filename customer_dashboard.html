@@ -7,6 +7,69 @@
     <title>Housekeeping Finder</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+@import url(https://fonts.googleapis.com/css?family=Muli);
+*{transition:all 0.5s;-webkit-transition:all 0.5s;}
+
+#toggle{
+  cursor:pointer;
+  width: 5px;
+  height: 5px;
+}
+.ico{
+  margin-left:7px;
+  margin-top:-4px;
+}
+
+#sidebar{
+  position:fixed;
+  width:400px;
+  right:-500px;
+  box-shadow:0px 0px 10px 3px black;
+  background-color:white;
+  border-left:1px solid black;
+  height:100%;
+  top:0px;
+  z-index: 1;
+}
+#sidebar h2{
+  color:red;
+  text-align:center;
+  font-family: 'Muli', sans-serif;
+}
+
+#sidebar.active{
+  right:0px;
+}
+.notibox{
+  color:Red;
+  font-family: 'Muli', sans-serif;
+  background-color: green;
+  width:calc(100% - 60px);
+  padding:15px;
+  margin:15px;
+  border-radius:4px;
+  position:relative;
+}
+.cancel{
+  position:absolute;
+  right:7px;
+  top:10px;
+  cursor:pointer;
+  padding:3px;
+  padding-left:8px;
+  padding-right:8px;
+  border-radius:20px;
+}
+.cancel:hover{
+  color:black;
+  background-color:cyan;
+}
+.gone{
+  display:none;
+}
+
+    </style>
 </head>
 <body>
     <div class="py-4 container-fluid">
@@ -18,7 +81,7 @@
     </div>
 
     <main class="row">
-        <div class="col-5 mx-auto my-5 border border-dark p-2 shadow">
+        <div class="col-7 mx-auto my-5 border border-dark p-2 shadow">
             <h2 class="text-info">Your Job Postings</h2>
             {% for job in jobs %}
             <div class="card mt-3">
@@ -31,34 +94,29 @@
                         Posted on: {{job.created_at.strftime('%m/%d/%Y')}}
                     </p>
                     <a href="/destroy/job/{{job.id}}"><span class="material-icons">delete</span></a>
-
-                    <a href="#"><span class="material-icons">
-                        mail_outline
-                        </span></a>
-
+                    <p id="toggle" onclick="toggle()"><span class="material-icons">mail_outline</span></p>
                 </div>
             </div>
             {% endfor %} 
         </div>       
 <!-- Notifications  -->
-    <div class="col-3 mx-auto my-5 border border-dark p-2 shadow">
-        <div class="card mt-3">
-            <div class="card-body">
-                <h2 class="text-info">Notifications</h2>
-                {% for app in applications %}
-                <div class="card shadow mb-2 ">
-                    <div class="card-body">
-                        <span>{{app['first_name']}}</span>
-                        <form action="/read_notification/{{app['id']}}" method="post">
-                            <button type="submit" formmethod="post" class="btn btn-sm btn-outline-secondary">Mark Read</button>
-                        </form>
-                    </div>
+        <div id="sidebar">
+            <h2 class="text-info">Notifications</h2>
+            {% for app in applications %}
+            <!-- Need to discuss how notifications are received and read. No controller found -->
+            <div id="message_div_notifications.id" class="card shadow mb-2 ">
+                <div class="card-body">
+                    <!-- NOTE to TOM/MAPLE - testing this to see if ID can be pulled NEEDS TO BE PUT BACK INTO JINJA SYNTEX <p> app['notification'].id </p> -->
+                    <span>{{app['housekeeper'].first_name}}'s massage:</span>
+                        <button class="btn btn-sm btn-outline-secondary cancel" onclick="cancel()">Mark Read</button> 
                 </div>
-                {% endfor %}
             </div>
-        </div>    
-    </div> 
-        <div class="col-3 mx-auto my-5 border border-dark p-2 shadow">
+            {% endfor %}
+          </div>
+        </div>
+
+    <!-- Applications  -->
+        <div class="col-4 mx-auto my-5 border border-dark p-2 shadow">
                 <h2 class="text-info">Applications</h2>
                 {% for app in applications %}
                 <div class="card mt-3">
@@ -80,7 +138,16 @@
         </div>
     </main>
     <script>
-    </script>  
+        function toggle() {
+            document.getElementById("toggle").classList.toggle("active");
+            document.getElementById("sidebar").classList.toggle("active");
+            console.log("toggling sidebar");
+        }
+        function cancel() {
+                document.getElementById("message_div").classList.toggle("gone");
+                console.log("toggling visibility");
+            }
+    </script>
 </body>
 </html>
 

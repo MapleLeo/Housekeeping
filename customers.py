@@ -57,7 +57,7 @@ def customer_logout():
     session.clear()
     return redirect('/')    
 
-
+# CREATED TO READ VIEW THE RESUME IN A SEPERATE PAGE
 @app.route('/customer/view_resume')
 def view_resume():
     if 'customer_id' not in session:

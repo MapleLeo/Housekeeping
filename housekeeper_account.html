@@ -17,6 +17,10 @@
         <div class="clearfix"></div>
     </div>
     <main class="row">
+
+<!-- NOTE TO DISCUSS not showing the housekeepers jobs not sure how/which tabel to call those from the datebase. -->
+
+<!-- Housekeepers Jobs -->
         <div class="col-7 mx-auto my-5 border border-dark p-2 shadow">
             <h2 class="text-info">{{housekeeper.first_name}}'s Jobs</h2>
             {% for job in jobs %}
@@ -28,27 +32,41 @@
                 </div>
             </div>
             {% endfor %}
-
-
         </div>
 
-
-
+<!-- Notification -->
         <div class="col-4 mx-auto my-5 border border-dark p-2 shadow">
             <h2 class="text-info">Notifications</h2>
             {% for app in applications %}
-            <div class="card shadow mb-2 ">
+            <div class="card shadow mb-2">
                 <div class="card-body">
-                    <span>{{app['first_name']}}</span>
+                    <!-- app['job'] needs to be changed as it's not pulling the customer's name -->
+                    <span>Message from: {{app['job'].first_name}}</span><br>
+                    <!-- possible remove line 46 -->
+                    <span>Title: {{app['job'].title}}</span><br> 
                     <span>Status: {{app['status']}}</span>
+                    <!-- NOTE to TOM/MAPLE - testing this to see if ID can be pulled NEEDS TO BE PUT BACK INTO JINJA SYNTEX <p> app['notification'].id </p> -->
+                        <button class="btn btn-sm btn-outline-secondary cancel" onclick="cancel()">Mark Read</button> 
+                    
+                        <!-- input in the prior update done by Maple -->
                     <form action="/read_notification/{{app['id']}}" method="post">
                         <button type="submit" formmethod="post" class="btn btn-sm btn-outline-secondary">Mark Read</button>
                     </form>
                 </div>
             </div>
             {% endfor %}
-
         </div>
     </div>
+    <script>
+        function toggle() {
+            document.getElementById("toggle").classList.toggle("active");
+            document.getElementById("sidebar").classList.toggle("active");
+            console.log("toggling sidebar");
+        }
+        function cancel() {
+                document.getElementById("message_div").classList.toggle("gone");
+                console.log("toggling visibility");
+            }
+    </script>
 </body>
 </html>

@@ -29,15 +29,15 @@
                 {% endif %}    
             {% endwith %} </div> 
             <h5 class="card-title">{{job.title}}</h5>
-            <p class="card-text"> Job Date and Time: {{job.date}} {{job.time}}</p>
+            <p class="card-text"> Job Date and Time: {{job.date.strftime('%m/%d/%Y')}} for {{job.time}}</p>
             <p class="card-text">Pay: {{job.pay}} </p>
-            <p class="card-text">Posted Date: {{job.created_at}} </p>
+            <p class="card-text">Posted Date: {{job.created_at.strftime("%m/%d/%Y at %I:%M %p")}} </p>
             <p class="card-text">Description: {{job.description}}</p>
 
             <form action="/apply/job/{{job.id}}" method="post" enctype="multipart/form-data">
                 <div class="form-group file-field">
-                    <div class="btn btn-primary btn-sm float-left mr-5">
-                        <input type="file" name='resume'accept="">
+                    <div class="btn btn-info">
+                        <span>Upload Resume <strong style="color: red;">(Must be PDF): </strong></span><input type="file" name='resume' accept="application/pdf">
                     </div>
                 </div>
                 <button type="submit" formmethod="post" class="btn btn-sm btn-outline-secondary">Apply</button>

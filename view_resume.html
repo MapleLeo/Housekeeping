@@ -20,7 +20,7 @@
     
     {% for app in applications %}
     <div class="d-flex justify-content-between col-9">
-    <div class="card mt-3">
+    <div class="col-4 mx-auto my-5 border border-dark p-2 shadow ">
         <div class="card-body">
             <h5 class="card-text">Job ID #: {{app['job'].id}}</h5>
             <h3 class="card-text">Resume for Housekeeper: {{app['housekeeper'].first_name}} {{app['housekeeper'].last_name}}</h3>
@@ -28,7 +28,7 @@
         </div>
     </div>
     
-        <div class="card mt-3 embed-responsive embed-responsive-4by3 w-100 h-100">
+        <div class="col-7 mx-auto my-5 boarder border-dark shadow embed-responsive embed-responsive-4by3 w-100 h-100">
             <iframe class="embed-responsive-item" src="/static/{{app['housekeeper'].first_name}}.resume.pdf"></iframe>
         </div>
     </div>
