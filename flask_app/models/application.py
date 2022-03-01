@@ -50,7 +50,9 @@ class Application:
     
     @classmethod
     def get_by_customer_with_job_and_housekeeper(cls, customer_id):
-        query = 'SELECT *, (select count(*) from notifications where notifications.application_id = applications.id AND notifications.is_from_customer = 1) as notification_count '\
+        query = 'SELECT *, '\
+            '(select count(*) from notifications where notifications.application_id = applications.id AND notifications.is_from_customer = 1) as notification_count, '\
+            'housekeepers.id as `housekeepers.id` '\
             'FROM applications '\
             'LEFT JOIN jobs on applications.job_id = jobs.id '\
             'LEFT JOIN housekeepers on applications.housekeeper_id = housekeepers.id '\
@@ -62,14 +64,8 @@ class Application:
         for row in results:
             applications.append(cls(row))
         return applications
-    
-    
-    @classmethod
-    def application_destroy(cls, id):
-        query = 'update applications set `show` = 0 where id=%(id)s;'
-        return connectToMySQL(cls.db).query_db(query, {'id': id})
-    
+
     @classmethod
     def set_status(cls, id, status):
-        query = 'update applications set `status` = %(status)s, `show`=1 where id=%(id)s;'
+        query = 'update applications set `status` = %(status)s where id=%(id)s;'
         return connectToMySQL(cls.db).query_db(query, {'id': id, 'status': status})
