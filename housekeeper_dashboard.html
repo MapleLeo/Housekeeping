@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housekeeper Finder</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="py-4 container-fluid">
+        <h2 class="float-left mb-0">Welcome back {{housekeeper.first_name}}!</h2>
+        <nav class="nav nav-masthead justify-content-center float-right">
+            <a href="/housekeeper/account" class="btn btn-info ml-1">Personal Account</a>
+            <a href="/logout" class="btn btn-info ml-1">Logout</a>
+        </nav>
+    </div>
+    <main class="row">
+        <div class="col-7 mx-auto my-5 border border-dark p-2 shadow">
+            <h2 class="text-info">Available Jobs:</h2>
+            {% for job in jobs %}
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{job.title}}</h5>
+                    <p class="card-text">
+                        Job Date and Time: {{job.date}} {{job.time}}<br>
+                        Pay: {{job.pay}} <br>
+                        Description: {{job.description}}<br>
+                        Posted Date: {{job.created_at}}<br>
+                        Posted By: {{first_name}}
+                    </p>
+                    <form action="/apply/job/{{job.id}}" method="post">
+                        <div class="form-group file-field">
+                            <div class="btn btn-primary btn-sm float-left mr-5">
+                                <input type="file" name='resume'>
+                            </div>
+                            
+                            
+                        </div>
+                        <button type="submit" formmethod="post" class="btn btn-sm btn-outline-secondary">Apply</button>
+                        
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </main>
+</body>
+</html>

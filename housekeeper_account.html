@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foster Account</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="py-4 container-fluid">
+        <h2 class="float-left mb-0">Welcome back {{housekeeper.first_name}}!</h2>
+        <nav class="nav nav-masthead justify-content-center float-right">
+            <a href="/housekeeper/dashboard" class="btn btn-info mr-1">Dashboard</a>
+            <a href="/logout" class="btn btn-info">Logout</a>
+        </nav>
+        <div class="clearfix"></div>
+    </div>
+    <main class="row">
+        <div class="col-7 mx-auto my-5 border border-dark p-2 shadow">
+            <h2 class="text-info">{{housekeeper.first_name}}'s Jobs</h2>
+            {% for job in jobs %}
+            <div class="card shadow mb-2">
+                <div class="card-body">
+                    <img src="/static/{{ pet.img }}" class="card-img-top" alt="{{pet.name}}'s pic">
+                    <h5 class="card-title">{{job.title}}</h5>
+                    <p class="card-text">Job Date & Time:{{job.date}} {{job.time}}</p>
+                    <p class="card-text">Customer:{{customer.first_name}}{{customer.last_name}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-4 mx-auto my-5 border border-dark p-2 shadow">
+            <h2 class="text-info">Notifications</h2>
+            {% for app in applications %}
+            <div class="card shadow mb-2 ">
+                <div class="card-body">
+                    <span>{{app['first_name']}}</span>
+                    <span>Status: {{app['status']}}</span>
+                    <form action="/read_notification/{{app['id']}}" method="post">
+                        <button type="submit" formmethod="post" class="btn btn-sm btn-outline-secondary">Mark Read</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</body>
+</html>
