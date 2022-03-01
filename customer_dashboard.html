@@ -16,8 +16,9 @@
             <a href="/logout" class="btn btn-info ml-1">Logout</a>
         </nav>
     </div>
+
     <main class="row">
-        <div class="col-7 mx-auto my-5 border border-dark p-2 shadow">
+        <div class="col-5 mx-auto my-5 border border-dark p-2 shadow">
             <h2 class="text-info">Your Job Postings</h2>
             {% for job in jobs %}
             <div class="card mt-3">
@@ -27,28 +28,49 @@
                         Job Date and Time: {{job.date.strftime('%m/%d/%Y')}} at {{job.time}} <br>
                         Pay: {{job.pay}} <br>
                         Description: {{job.description}} <br>
-                        Posted Date: {{job.created_at}}
+                        Posted on: {{job.created_at.strftime('%m/%d/%Y')}}
                     </p>
-                    <a href="/destroy/job/{{job.id}}"><span class="material-icons">
-                        delete
+                    <a href="/destroy/job/{{job.id}}"><span class="material-icons">delete</span></a>
+
+                    <a href="#"><span class="material-icons">
+                        mail_outline
                         </span></a>
+
                 </div>
             </div>
-            {% endfor %}
-        </div>
-        <div class="col-4 mx-auto my-5 border border-dark p-2 shadow">
+            {% endfor %} 
+        </div>       
+<!-- Notifications  -->
+    <div class="col-3 mx-auto my-5 border border-dark p-2 shadow">
+        <div class="card mt-3">
+            <div class="card-body">
+                <h2 class="text-info">Notifications</h2>
+                {% for app in applications %}
+                <div class="card shadow mb-2 ">
+                    <div class="card-body">
+                        <span>{{app['first_name']}}</span>
+                        <form action="/read_notification/{{app['id']}}" method="post">
+                            <button type="submit" formmethod="post" class="btn btn-sm btn-outline-secondary">Mark Read</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>    
+    </div> 
+        <div class="col-3 mx-auto my-5 border border-dark p-2 shadow">
                 <h2 class="text-info">Applications</h2>
                 {% for app in applications %}
                 <div class="card mt-3">
                     <div class="card-body">
-                        <h5 class="card-title">*****___ Was jinja syntax "app['pet_name']"____*****</h5>
                         <p class="card-text">Housekeeper Name: {{app['housekeeper'].first_name}} {{app['housekeeper'].last_name}}</p>
                         <p class="card-text">Housekeeper Contact: {{app['housekeeper'].email}}</p>
-
-                        <form action="/application/{{app['application_id']}}/approve" method="post">
+                        <a href="/customer/view_resume" class="card-img-top">View {{app['housekeeper'].first_name}}'s resume</a><br><br>
+                        <form action="/application/{{app.id}}/approve" method="post">
+                        </form>
                             <button class="btn btn-success mb-1" type="submit">Approve</button>
                         </form>
-                        <form action="/application/{{app['application_id']}}/reject" method="post">
+                        <form action="/application/{{app.id}}/reject" method="post">
                             <button class="btn btn-danger" type="submit">Reject</button>
                         </form>
                     </div>
@@ -57,5 +79,9 @@
             </div>
         </div>
     </main>
+    <script>
+    </script>  
 </body>
 </html>
+
+

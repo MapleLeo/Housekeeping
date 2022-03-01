@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housekeeping Finder - View Resume</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>  
+    <div class="py-4 container-fluid">
+        <h2 class="float-left mb-0">Welcome back {{customer.first_name}}!</h2>
+        <nav class="nav nav-masthead justify-content-center float-right">
+            <a href="/customer/dashboard" class="btn btn-info ml-1">Dashboard</a>
+            <a href="/logout" class="btn btn-info ml-1">Logout</a>
+        </nav>
+        <div class="clearfix"></div>
+    </div>
+    
+    {% for app in applications %}
+    <div class="d-flex justify-content-between col-9">
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-text">Job ID #: {{app['job'].id}}</h5>
+            <h3 class="card-text">Resume for Housekeeper: {{app['housekeeper'].first_name}} {{app['housekeeper'].last_name}}</h3>
+            <p class="card-text">Housekeeper Contact: {{app['housekeeper'].email}}</p>
+        </div>
+    </div>
+    
+        <div class="card mt-3 embed-responsive embed-responsive-4by3 w-100 h-100">
+            <iframe class="embed-responsive-item" src="/static/{{app['housekeeper'].first_name}}.resume.pdf"></iframe>
+        </div>
+    </div>
+    {% endfor %}
+    
+
+
+</body>
+</html>

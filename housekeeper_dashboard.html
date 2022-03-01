@@ -27,8 +27,8 @@
             {% for job in jobs %}
                 <tr class=" p-3 text-dark">
                     <td scope="col"><a href="/job/{{job.id}}">{{job.title}}</a></td>
-                    <td scope="col">{{job.created_at}}</td>
-                    <td scope="col">{{first_name}}</td>
+                    <td scope="col">{{job.created_at.strftime('%m/%d/%Y')}}</td>
+                    <td scope="col">{{job.customer.first_name}} {{job.customer.last_name}}</td>
                 </tr>
             {% endfor %}    
             </table>
