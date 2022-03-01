@@ -58,8 +58,8 @@ def destroy_job(id):
     data = {
         'id': id
     }
-    Job.destroy(data)
-    return redirect('/customer_dashboard')
+    Job.job_destroy(data)
+    return redirect('/customer/dashboard')
 
 @app.route('/job/<int:id>')
 def show_job(id):

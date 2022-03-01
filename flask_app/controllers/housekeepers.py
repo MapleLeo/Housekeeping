@@ -31,7 +31,7 @@ def housekeeper_login():
     if not housekeeper:
         flash("Invalid Email","housekeeper_login")
         return redirect('/housekeeper')
-    if not bcrypt.check_password_hash(foster.password, request.form['password']):
+    if not bcrypt.check_password_hash(housekeeper.password, request.form['password']):
         flash("Invalid Password","housekeeper_login")
         return redirect('/housekeeper')
     session['housekeeper_id'] = housekeeper.id
@@ -44,7 +44,7 @@ def housekeeper_dashboard():
     data = {
         'id': session['housekeeper_id']
     }
-    jobs = Job.get_all_available()
+    jobs = Job.get_all_available_with_customer()
     return render_template('housekeeper_dashboard.html',housekeeper=Housekeeper.get_by_id(data), jobs=jobs)
 
 @app.route('/housekeeper/account')

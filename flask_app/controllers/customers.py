@@ -31,10 +31,10 @@ def customer_login():
     if not customer:
         flash("Invalid Email","login")
         return redirect('/customer')
-    if not bcrypt.check_password_hash(shelter.password, request.form['password']):
+    if not bcrypt.check_password_hash(customer.password, request.form['password']):
         flash("Invalid Password","login")
         return redirect('/customer')
-    session['customer_id'] = shelter.id
+    session['customer_id'] = customer.id
     return redirect('/customer/dashboard')
 
 @app.route('/customer/dashboard')
