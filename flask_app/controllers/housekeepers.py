@@ -58,6 +58,21 @@ def housekeeper_account():
     housekeeper = Housekeeper.get_by_id({'id': session['housekeeper_id']})
     return render_template('housekeeper_account.html',housekeeper=Housekeeper.get_by_id(data), applications=applications)
 
+@app.route('/housekeeper/account/application/<int:id>')
+def housekeeper_account_application(id):
+    if 'housekeeper_id' not in session:
+        return redirect('/logout')
+    data = {
+        'id': session['housekeeper_id']
+    }
+    applications = Application.get_for_housekeeper_account(session['housekeeper_id'])
+    housekeeper = Housekeeper.get_by_id({'id': session['housekeeper_id']})
+    notifications = Notification.get_by_application({
+        'applications_id': id,
+        'is_from_customer': 1
+    })
+    return render_template('housekeeper_account_notification.html',housekeeper=Housekeeper.get_by_id(data), applications=applications, notifications=notifications)
+
 @app.route('/logout')
 def housekeeper_logout():
     session.clear()

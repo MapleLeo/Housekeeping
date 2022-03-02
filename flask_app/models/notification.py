@@ -15,6 +15,10 @@ class Notification:
         return connectToMySQL(cls.db).query_db(query, data)
     
     @classmethod
-    def get_raw_by_application(cls, data):
+    def get_by_application(cls, data):
         query = 'SELECT message, application_id, id, is_from_customer from notifications where application_id = %(application_id)s AND is_from_customer = %(is_from_customer)s'
-        return connectToMySQL(cls.db).query_db(query, data)
+        rows = connectToMySQL(cls.db).query_db(query, data)
+        results = []
+        for row in rows:
+            results.append(cls(row))
+        return results
