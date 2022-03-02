@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Housekeeping Finder</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: rgb(227, 239, 251);
+        }
+    </style>
 </head>
 <body>
     <div class="py-4 container-fluid">
@@ -16,7 +21,7 @@
         </nav>
         <div class="clearfix"></div>
     </div>
-    <form action="/create/job" method="post" enctype="multipart/form-data" class="col-11 p-4 my-4 mx-auto border border-dark">
+    <form action="/create/job" method="post" enctype="multipart/form-data" class="col-11 p-4 my-4 mx-auto border border-dark shadow card">
         <h2 class="text-info">Post A New Job</h2>
         {% with messages = get_flashed_messages(category_filter=['job']) %}
             {% if messages %}
@@ -27,7 +32,7 @@
             </div>
             {% endif %}
         {% endwith %}
-        <div class="d-flex justify-content-between col-9">
+        <div class="d-flex justify-content-between col-11 card p-3 shadow">
             <div class="col-4">
                 <div class="form-group">
                     <label for="title">Title:</label>
