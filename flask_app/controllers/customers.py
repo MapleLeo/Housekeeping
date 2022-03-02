@@ -67,7 +67,7 @@ def customer_dashboard_notification(id):
         'application_id': id,
         'is_from_customer': 0,
     })
-    return render_template('customer_dashboard_notification.html',customer=Customer.get_by_id(data),jobs=jobs, applications=applications, notifications=notifications)
+    return render_template('customer_dashboard_notification.html',customer=Customer.get_by_id(data),jobs=jobs, applications=applications, notifications=notifications, application_id=id)
 
 @app.route('/customer/view_resume')
 def view_resume():

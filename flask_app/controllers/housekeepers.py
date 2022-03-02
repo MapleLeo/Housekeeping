@@ -72,7 +72,7 @@ def housekeeper_account_notification(id):
         'application_id': id,
         'is_from_customer': 1
     })
-    return render_template('housekeeper_account_notification.html',housekeeper=Housekeeper.get_by_id(data), applications=applications, notifications=notifications)
+    return render_template('housekeeper_account_notification.html',housekeeper=Housekeeper.get_by_id(data), applications=applications, notifications=notifications, application_id=id)
 
 @app.route('/logout')
 def housekeeper_logout():
