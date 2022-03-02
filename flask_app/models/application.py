@@ -43,7 +43,6 @@ class Application:
             'JOIN customers on customers.id = jobs.customer_id '\
             'where applications.housekeeper_id = %(housekeeper_id)s;'
         results = connectToMySQL(cls.db).query_db(query, {'housekeeper_id': housekeeper_id})
-        print(results)
         applications = []
         for row in results:
             applications.append(cls(row))

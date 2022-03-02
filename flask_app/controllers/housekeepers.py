@@ -3,6 +3,7 @@ from flask_app import app
 from flask_app.models.housekeeper import Housekeeper
 from flask_app.models.job import Job
 from flask_app.models.application import Application
+from flask_app.models.notification import Notification
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -68,7 +69,7 @@ def housekeeper_account_notification(id):
     applications = Application.get_for_housekeeper_account(session['housekeeper_id'])
     housekeeper = Housekeeper.get_by_id({'id': session['housekeeper_id']})
     notifications = Notification.get_by_application({
-        'applications_id': id,
+        'application_id': id,
         'is_from_customer': 1
     })
     return render_template('housekeeper_account_notification.html',housekeeper=Housekeeper.get_by_id(data), applications=applications, notifications=notifications)

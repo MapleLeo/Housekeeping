@@ -64,11 +64,24 @@ def customer_dashboard_notification(id):
     jobs = Job.get_by_customer(job_data)
     applications = Application.get_by_customer_with_job_and_housekeeper(session['customer_id'])
     notifications = Notification.get_by_application({
-        'applications_id': id,
+        'application_id': id,
         'is_from_customer': 0,
     })
     return render_template('customer_dashboard_notification.html',customer=Customer.get_by_id(data),jobs=jobs, applications=applications, notifications=notifications)
 
+@app.route('/customer/view_resume')
+def view_resume():
+    if 'customer_id' not in session:
+        return redirect('/logout')
+    data = {
+        'id': session['customer_id']
+    }
+    job_data = {
+        'customer_id': session['customer_id']
+    }
+    jobs = Job.get_by_customer(job_data)
+    applications = Application.get_by_customer_with_job_and_housekeeper(session['customer_id'])
+    return render_template('view_resume.html',customer=Customer.get_by_id(data),jobs=jobs, applications=applications)    
 
 @app.route('/logout')
 def customer_logout():
