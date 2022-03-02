@@ -52,7 +52,7 @@ def customer_dashboard():
     return render_template('customer_dashboard.html',customer=Customer.get_by_id(data),jobs=jobs, applications=applications)
 
 @app.route('/customer/dashboard/application/<int:id>')
-def customer_dashboard(id):
+def customer_dashboard_notification(id):
     if 'customer_id' not in session:
         return redirect('/logout')
     data = {

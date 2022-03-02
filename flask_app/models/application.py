@@ -36,7 +36,8 @@ class Application:
     def get_for_housekeeper_account(cls, housekeeper_id):
         query = 'SELECT'\
             '*, '\
-            '(select count(*) from notifications where notifications.application_id = applications.id AND notifications.is_from_customer = 0) as notification_count '\
+            '(select count(*) from notifications where notifications.application_id = applications.id AND notifications.is_from_customer = 0) as notification_count, '\
+            'jobs.id as `jobs.id` '\
             'FROM applications '\
             'LEFT JOIN jobs on applications.job_id = jobs.id '\
             'JOIN customers on customers.id = jobs.customer_id '\

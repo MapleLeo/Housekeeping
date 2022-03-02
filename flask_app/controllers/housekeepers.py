@@ -59,7 +59,7 @@ def housekeeper_account():
     return render_template('housekeeper_account.html',housekeeper=Housekeeper.get_by_id(data), applications=applications)
 
 @app.route('/housekeeper/account/application/<int:id>')
-def housekeeper_account_application(id):
+def housekeeper_account_notification(id):
     if 'housekeeper_id' not in session:
         return redirect('/logout')
     data = {
