@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Housekeeper Notifications</title>
+    <title>Customer Notifications</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         body {
@@ -14,11 +14,10 @@
 </head>
 <body>
     <div class="py-4 container-fluid">
-        <h2 class="float-left mb-0">Welcome back {{housekeeper.first_name}}!</h2>
+        <h2 class="float-left mb-0">Welcome to your notifications {{customer.first_name}}!</h2>
         <nav class="nav nav-masthead justify-content-center float-right">
-            <a href="/housekeeper/dashboard" class="btn btn-info mr-1">Dashboard</a>
-            <a href="/housekeeper/account" class="btn btn-info ml-1 mr-1">Personal Account</a>
-            <a href="/logout" class="btn btn-info ml-1">Logout</a>
+            <a href="/customer/dashboard" class="btn btn-info mr-1">Dashboard</a>
+            <a href="/logout" class="btn btn-info">Logout</a>
         </nav>
         <div class="clearfix"></div>
     </div>
@@ -36,18 +35,17 @@
                         </p>
                         <br>
                         <!-- reply button doesn't work because the application_id won't pull a number -->
-                        <form action="/application/{{n.application_id}}/housekeeper_reply" method="post">
+                        <form action="/application/{{application_id}}/customer_reply" method="post" >
                             <textarea class="card mb-1 py-4 container-fluid" name="message" placeholder="Enter Reply Message Here"></textarea><br>
                             <button class="float-left btn btn-success mb-1" type="submit">Reply</button>
                         </form>    
                         <form action="/read_notification/{{n.id}}" method="post" class="float-right">
                             <button class="btn btn-danger mb-1" type="submit">Mark Read</button>
                         </form>
-                    </div>
+                    </div>    
                 </div>
             </div>
             {% endfor %}
-            
     </main>
     </body>
     </html>
