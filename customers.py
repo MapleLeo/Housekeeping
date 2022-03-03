@@ -63,17 +63,12 @@ def customer_dashboard_notification(id):
         'customer_id': session['customer_id']
     }
     jobs = Job.get_by_customer(job_data)
-    applications = Application.get_by_customer_with_job_and_housekeeper(session['customer_id'])   
+    applications = Application.get_by_customer_with_job_and_housekeeper(session['customer_id'])
     notifications = Notification.get_by_application({
         'application_id': id,
         'is_from_customer': 0,
-    })    
-    return render_template('customer_dashboard_notification.html', customer=Customer.get_by_id(data),jobs=jobs, applications=applications, notifications=notifications)
-
-@app.route('/logout')
-def customer_logout():
-    session.clear()
-    return redirect('/')
+    })
+    return render_template('customer_dashboard_notification.html',customer=Customer.get_by_id(data),jobs=jobs, applications=applications, notifications=notifications, application_id=id)
 
 @app.route('/customer/view_resume')
 def view_resume():
@@ -87,4 +82,17 @@ def view_resume():
     }
     jobs = Job.get_by_customer(job_data)
     applications = Application.get_by_customer_with_job_and_housekeeper(session['customer_id'])
-    return render_template('view_resume.html',customer=Customer.get_by_id(data),jobs=jobs, applications=applications)        
+    return render_template('view_resume.html',customer=Customer.get_by_id(data),jobs=jobs, applications=applications)    
+
+@app.route('/customer_read_notification/<int:id>',methods=['POST'])
+def customer_read_notification(id):
+    if 'customer_id' not in session:
+        return redirect('/logout')
+    Notification.mark_read(id)
+    print(id)
+    return redirect('/customer/dashboard')     
+
+@app.route('/logout')
+def customer_logout():
+    session.clear()
+    return redirect('/')

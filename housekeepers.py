@@ -72,19 +72,20 @@ def housekeeper_account_application(id):
         'application_id': id,
         'is_from_customer': 1
     })
-    return render_template('housekeeper_account_notification.html',housekeeper=Housekeeper.get_by_id(data), applications=applications, notifications=notifications)
+    
+    return render_template('housekeeper_account_notification.html',housekeeper=Housekeeper.get_by_id(data), applications=applications, notifications=notifications, application_id=id)
 
 @app.route('/logout')
 def housekeeper_logout():
     session.clear()
     return redirect('/')    
 
-@app.route('/read_notification/<int:id>', methods=['POST'])
+@app.route('/housekeeper_read_notification/<int:id>', methods=['POST'])
 def read_notification(id):
     if 'housekeeper_id' not in session:
         return redirect('/logout')
-    data = {
-        'id': id
-    }    
-    Notification.mark_read(data)
+    id = int(id)
+    Notification.mark_read(id)
+    print(type(id))
+    print(id)
     return redirect('/housekeeper/account')

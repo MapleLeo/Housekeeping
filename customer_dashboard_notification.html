@@ -31,15 +31,16 @@
                     <div class="py-4 container-fluid">
                         <p>
                             Message ID: {{n.id}}<br>
+                            App ID: {{application_id}}<br>
                             Message: {{n.message}}<br>
                         </p>
                         <br>
                         <!-- reply button doesn't work because the application_id won't pull a number -->
-                        <form action="/application/{{n.application_id}}/customer_reply" method="post" >
+                        <form action="/application/{{application_id}}/customer_reply" method="post" >
                             <textarea class="card mb-1 py-4 container-fluid" name="message" placeholder="Enter Reply Message Here"></textarea><br>
                             <button class="float-left btn btn-success mb-1" type="submit">Reply</button>
                         </form>    
-                        <form action="/read_notification/{{n.id}}" method="post" class="float-right">
+                        <form action="/customer_read_notification/{{n.id}}" method="post" class="float-right">
                             <button class="btn btn-danger mb-1" type="submit">Mark Read</button>
                         </form>
                     </div>    
